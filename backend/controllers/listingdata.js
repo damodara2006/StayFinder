@@ -7,4 +7,20 @@ const listingdata = Apihandler(async(req,res)=>{
     res.send(data)
 })
 
-export default listingdata
+const updatelike = Apihandler(async(req,res)=>{
+    let{id,data} = req.params
+    console.log(id)
+    let bool;
+    if(data == "true"){
+        bool = true
+    }
+    else{
+        bool = false
+    }
+    console.log(typeof data)
+    const item = await ListSchema.updateOne({_id:id},{liked:!bool})
+    console.log(item)
+    res.send("Done")
+})
+
+export  {listingdata,updatelike}

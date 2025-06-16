@@ -16,6 +16,10 @@ const List = new Schema({
     },
     description:{
         type:String
+    },
+    liked:{
+        type:Boolean,
+        default:false
     }
 },{
     timestamps: true

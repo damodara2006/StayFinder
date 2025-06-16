@@ -11,7 +11,8 @@ import {ToastContainer, toast} from "react-toastify"
 import { MdEmail } from "react-icons/md";
 import { FaGoogle } from "react-icons/fa";
 import axios from "axios"
-import { AiTwotoneHeart } from "react-icons/ai";
+import { FaRegHeart } from "react-icons/fa";
+import {useNavigate} from "react-router-dom"
 function Home() {
   let BASE_URL = "http://localhost:8080"
     const [search, setSearch] = useState(window.innerWidth >= 600);
@@ -23,12 +24,25 @@ function Home() {
     let username = useRef("")
     const[userm,setuser] = useState()
     const[data,setdata] = useState([])
+    const[searchw, setsearchw] = useState(300)
+    let navigate = useNavigate()
     useEffect(()=>{
       axios.get(`${BASE_URL}/listing`)
-      .then(res=>setdata(res.data))
-    },[data.length])
+      .then(res=>{setdata(res.data )})
+    },[data])
+
+    const[navb, setnavb] = useState(true)
 
     const[reg, setreg] = useState(false)
+
+    useEffect(()=>{
+      axios.get(`${BASE_URL}/finduser`,{withCredentials:true})
+      .then(res=>{
+        if(res.data){
+          setuser(res.data)
+        }
+      })
+    })
 
     const loging = useGoogleLogin({
       onSuccess: tokenResponse => {
@@ -47,8 +61,8 @@ function Home() {
             if(ress.data.email){
               axios.post(`${BASE_URL}/cookie`,{email:ress.data.email},{withCredentials:true})
               toast.success("Login successfull",{autoClose:2500})
-              setlogin(!login)
-              setsidebar(!sidebar)
+              setlogin(false)
+              setsidebar(false)
               // username.current.value 
               setuser(ress.data.username)
             }
@@ -101,11 +115,13 @@ function Home() {
     }else{
       axios.post(`${BASE_URL}/login`,{email:email.current.value, source:1, password:password.current.value},{withCredentials:true})
       .then(res=>{
+        let email = res.data.email
         if(res.data.email){
           toast.success("Login successfull",{autoClose:2500})
+          axios.post(`${BASE_URL}/cookie`,{email},{withCredentials:true})
           setsidebar(!sidebar)
           setlogin(!login)
-          console.log(res)
+          // console.log(res)
           setuser(res.data.username)
         }
         else{
@@ -115,11 +131,11 @@ function Home() {
     }
   }
 
-  // console.log(data)
+  // console.log(userm)
   return (
-    <div className="w-screen h-screen overflow-y-auto">
+    <div className="w-screen h-screen overflow-y-auto relative">
       <ToastContainer/>
-      <nav className="h-[17%] bg-gray-100 min-w-full flex justify-center flex-col relative">
+      <nav className="h-[17%] bg-gray-100 min-w-full flex justify-center flex-col fixed z-50">
         {search? 
         <p className="font-embed absolute left-6 top-6 text-xl text-red-400 font-bold">StayFinder</p>
         :""
@@ -138,21 +154,32 @@ function Home() {
             <div className='flex flex-row w-[100%] h-full text-center '>
             
     
-            <li  className='w-[100%] flex  justify-center rounded-4xl hover:bg-gray-200 active:bg-gray-200 text-[14px] lg:text-[15px] md:text-[15px] xl:text-[15px] transition-all flex-col text-left pl-7 font-bold ' >Where <span className='font-normal text-gray-500'>Search destination</span></li>
+           {navb ?<> <li  className='w-[100%] flex  justify-center rounded-4xl hover:bg-gray-200 active:bg-gray-200 text-[14px] lg:text-[15px] md:text-[15px] xl:text-[15px] transition-all flex-col text-left pl-7 font-bold ' >Where <span className='font-normal text-gray-500'>Search destination</span></li>
             <li  className='w-[100%] flex  justify-center rounded-4xl hover:bg-gray-200 active:bg-gray-200 text-[14px] lg:text-[15px] md:text-[15px] xl:text-[15px] transition-all flex-col text-left pl-7 font-bold ' >Check in <span className='font-normal text-gray-500'>Add dates</span></li>
             <li  className='w-[100%] flex  justify-center rounded-4xl hover:bg-gray-200 active:bg-gray-200 text-[14px] lg:text-[15px] md:text-[15px] xl:text-[15px] transition-all flex-col text-left pl-7 font-bold ' >Check out <span className='font-normal text-gray-500'>Add dates</span></li>
-            <li  className='w-[100%] flex  justify-center rounded-4xl hover:bg-gray-200 active:bg-gray-200 text-[14px] lg:text-[15px] md:text-[15px] xl:text-[15px] transition-all flex-col text-left pl-7 font-bold ' >Who <span className='font-normal text-gray-500'>Add guests</span></li>
+            <li  className='w-[100%] flex  justify-center rounded-4xl hover:bg-gray-200 active:bg-gray-200 text-[14px] lg:text-[15px] md:text-[15px] xl:text-[15px] transition-all flex-col text-left pl-7 font-bold ' >Who <span className='font-normal text-gray-500'>Add guests</span></li> </> : "" }
 
 
 
 
-                       <li className='w-[300px] bg-rose-400 mr-1 flex items-center justify-center rounded-full h-[90%] text-center mt-1  hover:bg-rose-500 transition-all active:bg-gray-200 text-white' ><IoSearch /> </li>
+                       <li className=' bg-rose-400 mr-1 flex items-center justify-center rounded-full h-[90%] text-center mt-1  hover:bg-rose-500 transition-all duration-600 active:bg-gray-200 text-white' style={{width:`${searchw}px`}}><IoSearch onClick={()=>{setsearchw(()=>{
+                        if(searchw == 2000){
+                          setsearchw(0)
+                        }
+                        else{
+                          setsearchw(2000)
+                        }
+                       }),setnavb(!navb)
+                       setTimeout(()=>(
+                         setsearchw(0)
+        ),1200) }
+                      }  /> </li>
 
             </div>
             </ul>
           </div>
         ) : <div className='flex h-[100%] items-center justify-center mb-3  '>
-            <div className='flex flex-row w-[90%] rounded-4xl  bg-white shadow-md shadow-gray-700 outline-0 pl-4'>
+            <div className='flex flex-row w-[90%] max-w-[500px] rounded-4xl  bg-white shadow-md shadow-gray-700 outline-0 pl-4'>
             <input type="text" className='w-[85%]  h-16 outline-0 text-lg pl-5 placeholder:text-center placeholder:font-bold placeholder:text-black' placeholder='Start your search' />
             <p className='text-2xl  p-5 rounded-full'><IoSearch /></p>
             </div>
@@ -161,7 +188,7 @@ function Home() {
             
       </nav>
       {search? 
-      <div >
+      <div className='z-50 relative' >
         <p className='top-5 right-40 text-sm absolute p-2 rounded-full font-bold '>{userm ? userm : ""}</p>
         {userm ? "": <p className=' hidden lg:block xl:block top-5 right-42 text-md absolute p-2'>Become a host</p>}
         <div className=' top-4 right-27 text-3xl absolute p-2 rounded-full bg-gray-300 '>
@@ -174,7 +201,7 @@ function Home() {
 
       </div>
        :""}
-       {sidebar  ?<div className='absolute  w-fit bg-white top-16 h-fit px-5 py-2 right-7 rounded-b-xl rounded-[90%/100%]  shadow-xl text-center pt-3 cursor-pointer'onClick={()=>{
+       {sidebar  ?<div className='absolute z-50 w-fit bg-white top-16 h-fit px-5 py-2 right-7 rounded-b-xl rounded-[90%/100%]  shadow-xl text-center pt-3 cursor-pointer'onClick={()=>{
         if(login){
           setlogin(false)
         }else{
@@ -183,12 +210,12 @@ function Home() {
        }} >
         Login
        </div> : "" }
-      {login ?  <div className='w-screen h-screen flex absolute top-0 justify-center items-center border backdrop-blur-sm ' onClick={()=>{if(login){
+      {login ?  <div className='w-screen h-screen flex absolute top-0 justify-center items-center border backdrop-blur-sm z-50 ' onClick={()=>{if(login){
           setlogin(false)
         }else{
           setlogin(true)
         }}}>
-       <div className='w-[70%] h-[50%] border top-0 rounded-2xl min-w-[350px] max-w-[500px] relative shadow-2xl' onClick={(e)=>e.stopPropagation()}>
+       <div className='w-[70%] h-[50%] z-50 border top-0 rounded-2xl min-w-[350px] max-w-[500px] relative shadow-2xl bg-white' onClick={(e)=>e.stopPropagation()}>
        <p className='text-sm absolute top-3 left-3 p-2 rounded-full bg-gray-200 hover:scale-125 transition-all' onClick={()=>{
         setlogin(!login)
         // setsidebar(false)
@@ -208,13 +235,52 @@ function Home() {
        </div>
        </div> : ""}
 
-       <div className='mt-5 ml-5'>
-        <ul className='flex gap-5'>
+       <div className=' ml-5 absolute top-48'>
+        <ul className='flex gap-5 flex-wrap justify-center items-center'>
           {data.map((item, key)=>(
-            <li key={key} className='relative'>
-              <div className='w-[230px] h-[230px]'>
-              <img src={item.image} alt="" className='w-full h-full object-cover rounded-2xl' /> <AiTwotoneHeart className='absolute top-5 right-5 text-2xl hover:scale-125 transition-all' />
+            // console.log(item),
+            <li key={key} className='relative ' onClick={()=>{
+              navigate("/item",{state:{data:item}})
+            }}>
+              <div className='w-[200px] h-[200px]  mt-10 xl:w-[230px] xl:h-[230px] lg:w-[220px] lg:h-[220px] md:w-[210px] md:h-[210px]'>
+              <img src={item.image} alt="" className='w-full h-full object-cover rounded-2xl' /> 
+              {item.liked ? <FaRegHeart className='absolute top-15 right-6 text-[23px] hover:scale-125 transition-all text-red-600 active:scale-95 ' onClick={()=>{
+                
+                if(userm){
+                  let like = toast.loading("Processing",{style:{width:"200px"}})
+                axios.post(`${BASE_URL}/updatelike/${item._id}/${item.liked}`)
+                .then(res=>{
+                  if(res.data == "Done")
+                    toast.update(like,{render:"Unliked", type:"success",isLoading:false , autoClose:700,style:{width:"120px"}})
+                  else{
+                    toast.update(like,{render:"Failed", type:"error", isLoading:false , autoClose:700,style:{width:"120px"}})
+                  }
+                })
+                }
+                else{
+                  setlogin(true)
+                }
+              }}  /> : <FaRegHeart className='absolute top-15 right-6 text-[23px] hover:scale-125 transition-all text-black active:scale-95 '  onClick={()=>{
+                console.log(userm)
+                if(userm)
+               {
+                let like = toast.loading("Processing",{style:{width:"200px"}})
+                axios.post(`${BASE_URL}/updatelike/${item._id}/${item.liked}`)
+                .then(res=>{
+                  if(res.data == "Done")
+                    toast.update(like,{render:"Liked", type:"success",isLoading:false , autoClose:700,style:{width:"120px"}})
+                  else{
+                    toast.update(like,{render:"Failed", type:"error",isLoading:false , autoClose:700, style:{width:"120px"}})
+                  }
+                })
+               }
+               else{
+                setlogin(!login)
+              }
+
+              }}/>}
               <p className='text-left ml-2 text-sm font-semibold mt-2'>{item.name}, {item.area}, ₹{item.price}</p>
+              <p className='text-sm pl-2 text-gray-500'>{item.description}</p>
               </div>
 
             </li>

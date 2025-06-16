@@ -62,9 +62,18 @@ const loginuser = Apihandler(async(req,res)=>{
 const cookie = Apihandler(async(req,res)=>{
     const {email} = req.body;
     const value = jwt.sign({email}, "json-web-token")
-    res.cookie("Login", value, {maxAge:10000})
+    res.cookie("Login", value, {maxAge:600000})
     console.log("Done")
     res.send("Done")  
 })
 
-export { loginuser, cookie}
+const finduser = Apihandler(async(req,res)=>{
+    
+    let cook = req.cookies.Login
+    if(cook){
+        let data = jwt.verify(cook,"json-web-token")
+    // console.log(data)
+    res.send(data.email)
+    }
+})
+export { loginuser, cookie,finduser}
