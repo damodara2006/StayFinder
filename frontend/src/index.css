@@ -1,6 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Savate:ital,wght@0,200..900;1,200..900&display=swap');
 @import "tailwindcss";
 
 @theme{
     --font-embed: Savate, sans-serif;
+    --font-bebas : Bebas Neue, sans-serif;
 }

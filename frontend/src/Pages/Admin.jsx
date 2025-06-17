@@ -8,6 +8,7 @@ function Admin() {
     const[hotel, sethotel] = useState()
     const[area, setarea] = useState()
     const[des,setdes] = useState()
+    const[image, setimage] = useState()
     // console.log(filename)
     const handlesubmit = ()=>{
       let loading = toast.loading("Processing")
@@ -30,6 +31,11 @@ function Admin() {
               isLoading: false,
               autoClose: 1000,
               closeButton: true,})
+              setimage(res.data.image)
+              setarea("")
+              setcost("")
+              setdes("")
+              sethotel("")
           }
         })
 
@@ -39,6 +45,7 @@ function Admin() {
     <div className='flex w-screen h-screen items-center flex-col gap-3 '>
       <ToastContainer/>
       <input type="file" className='hidden mt-3' id='input-file'  />
+      {image ? <div className='w-[400px] h-[400px]'> <img src={image} alt='Picture' className='w-full h-full object-cover '/> </div> : "" }
       <label htmlFor="input-file" className='border px-2 py-1 h-fit rounded-sm mt-3 hover:bg-blue-200 transition-all '> Choose file </label> <p>{filename}</p>
       <input type="text" className='border h-10 pl-2 ' placeholder='Enter the name of hotel' value={hotel} onChange={e=>sethotel(e.target.value)} />
       <input type="text" className="border h-10 pl-2" placeholder='Enter area name' value={area} onChange={e=>setarea(e.target.value)} />

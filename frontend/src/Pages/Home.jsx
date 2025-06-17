@@ -244,8 +244,8 @@ function Home() {
             }}>
               <div className='w-[200px] h-[200px]  mt-10 xl:w-[230px] xl:h-[230px] lg:w-[220px] lg:h-[220px] md:w-[210px] md:h-[210px]'>
               <img src={item.image} alt="" className='w-full h-full object-cover rounded-2xl' /> 
-              {item.liked ? <FaRegHeart className='absolute top-15 right-6 text-[23px] hover:scale-125 transition-all text-red-600 active:scale-95 ' onClick={()=>{
-                
+              {item.liked ? <FaRegHeart className='absolute top-15 right-6 text-[23px] hover:scale-125 transition-all text-red-600 active:scale-95 ' onClick={(e)=>{
+                e.stopPropagation()
                 if(userm){
                   let like = toast.loading("Processing",{style:{width:"200px"}})
                 axios.post(`${BASE_URL}/updatelike/${item._id}/${item.liked}`)
@@ -258,9 +258,10 @@ function Home() {
                 })
                 }
                 else{
-                  setlogin(true)
+                  setlogin(!login)
                 }
-              }}  /> : <FaRegHeart className='absolute top-15 right-6 text-[23px] hover:scale-125 transition-all text-black active:scale-95 '  onClick={()=>{
+              }}  /> : <FaRegHeart className='absolute top-15 right-6 text-[23px] hover:scale-125 transition-all text-black active:scale-95 '  onClick={(e)=>{
+                e.stopPropagation()
                 console.log(userm)
                 if(userm)
                {
@@ -280,7 +281,7 @@ function Home() {
 
               }}/>}
               <p className='text-left ml-2 text-sm font-semibold mt-2'>{item.name}, {item.area}, ₹{item.price}</p>
-              <p className='text-sm pl-2 text-gray-500'>{item.description}</p>
+              {/* <p className='text-sm pl-2 text-gray-500'>{item.description}</p> */}
               </div>
 
             </li>
