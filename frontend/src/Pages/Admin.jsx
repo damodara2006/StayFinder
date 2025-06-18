@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useRef, useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify'
 function Admin() {
-  let BASE_URL = "http://localhost:8080"
+  let BASE_URL = "https://stayfinder-backend-dcdq.onrender.com"
     let [filename, setfilename] = useState()
     const[cost, setcost] = useState(0)
     const[hotel, sethotel] = useState()

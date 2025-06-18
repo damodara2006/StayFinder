@@ -19,7 +19,7 @@ import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css";
 function Item() {
   const[showmore, setshowmore] = useState(true)
-    let BASE_URL = "http://localhost:8080"
+    let BASE_URL = "https://stayfinder-backend-dcdq.onrender.com"
     const [startDate, setStartDate] = useState(new Date());
     const [enddate, setEnddate] = useState(new Date());
 

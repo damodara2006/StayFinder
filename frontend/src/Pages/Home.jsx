@@ -14,7 +14,7 @@ import axios from "axios"
 import { FaRegHeart } from "react-icons/fa";
 import {useNavigate} from "react-router-dom"
 function Home() {
-  let BASE_URL = "http://localhost:8080"
+  let BASE_URL = "https://stayfinder-backend-dcdq.onrender.com"
     const [search, setSearch] = useState(window.innerWidth >= 600);
     const [sidebar, setsidebar] = useState(false)
     const [login, setlogin] = useState(false)
