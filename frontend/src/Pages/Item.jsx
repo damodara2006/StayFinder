@@ -25,6 +25,9 @@ function Item() {
 
     let location = useLocation()
     let data = location.state.data
+    let user = location?.state?.user
+    console.log(user)
+
     const [search, setSearch] = useState(window.innerWidth >= 600);
     const [sidebar, setsidebar] = useState(false)
     const [login, setlogin] = useState(false)
@@ -47,9 +50,11 @@ function Item() {
     console.log(data)
     const[price, setprice] = useState(0)
     let text = data.description
-    console.log(text)
+    const[confirm, setconfirm] = useState(false)
+    // console.log(text)
   return (
     <div className='w-screen flex items-center justify-center flex-col relative min-h-screen'>
+      <ToastContainer/>
         <nav className="h-[17%] bg-gray-100 min-w-full flex justify-center flex-col fixed z-30 top-0">
                 {search? 
                 <p className="font-embed absolute left-6 top-6 text-xl text-red-400 font-bold">StayFinder</p>
@@ -62,7 +67,11 @@ function Item() {
                    <li className='flex flex-row items-center justify-center text-center gap-2 relative after:border-1 after:w-0 after:bottom-0 after:absolute hover:after:w-full after:transition-all after:opacity-0 hover:after:opacity-100 hover:scale-110 transition-all'><span className='text-xl'><MdRoomService /></span>Services</li>
                   </ul>
                 </div>
-      
+               <div className='absolute top-4 right-10 font-bold'>
+               {
+                  user ? <p>{user}</p> : <p >Not logined</p>
+                }
+               </div>
                 
 
                 {search ? (
@@ -118,7 +127,21 @@ function Item() {
                 setprice((prev)=>prev + 1)
             }}>+</button></span>
             <p className='mt-3 font-medium'>2 Nights Total : ₹<span className='font-bold'>{price*data.price}</span></p>
-            <button className='bg-gradient-to-r from-violet-600 to-violet-400 px-4 rounded-sm text-white mt-3 py-1 cursor-pointer hover:scale-110 transition-all'>Book now</button>
+            <button className='bg-gradient-to-r from-violet-600 to-violet-400 px-4 rounded-sm text-white mt-3 py-1 cursor-pointer hover:scale-110 transition-all'onClick={()=>{
+             setconfirm(!confirm)
+            }} >Book now</button>
+            {confirm ? <button className='bg-gradient-to-r from-violet-600 to-violet-400 px-4 rounded-sm text-white mt-4 py-1 cursor-pointer hover:scale-110 transition-all'onClick={()=>{
+              axios.post(`${BASE_URL}/book`,{user:user, roomid:data._id, price:(price*data.price), startdate:startDate, enddate:enddate})
+              .then(res=>{
+                if(res.data.user && res.data.price){
+                  toast.success("Booked")
+                  setconfirm(false)
+                }
+                else{
+                  toast.error(res.data)
+                }
+              })
+            }} >Confirm</button> : ""}
             
         </div>
        <hr className="bg-black text-sm w-full mt-8"/>

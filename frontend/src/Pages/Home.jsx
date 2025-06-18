@@ -64,7 +64,7 @@ function Home() {
               setlogin(false)
               setsidebar(false)
               // username.current.value 
-              setuser(ress.data.username)
+              setuser(ress.data.email)
             }
             
           })
@@ -240,7 +240,7 @@ function Home() {
           {data.map((item, key)=>(
             // console.log(item),
             <li key={key} className='relative ' onClick={()=>{
-              navigate("/item",{state:{data:item}})
+              navigate("/item",{state:{data:item, user:userm}})
             }}>
               <div className='w-[200px] h-[200px]  mt-10 xl:w-[230px] xl:h-[230px] lg:w-[220px] lg:h-[220px] md:w-[210px] md:h-[210px]'>
               <img src={item.image} alt="" className='w-full h-full object-cover rounded-2xl' /> 
