@@ -64,7 +64,7 @@ function Home() {
               setlogin(false)
               setsidebar(false)
               // username.current.value 
-              setuser(ress.data.username)
+              setuser(ress.data.email)
             }
             
           })
