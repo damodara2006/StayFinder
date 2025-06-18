@@ -53,11 +53,11 @@ function Item() {
     const[confirm, setconfirm] = useState(false)
     // console.log(text)
   return (
-    <div className='w-screen flex items-center justify-center flex-col relative min-h-screen'>
+    <div className='w-screen flex items-center justify-center flex-col relative '>
       <ToastContainer/>
-        <nav className="h-[17%] bg-gray-100 min-w-full flex justify-center flex-col fixed z-30 top-0">
+        <nav className="h-[10%] bg-gray-100 w-full flex justify-center flex-col fixed z-30 top-0 ">
                 {search? 
-                <p className="font-embed absolute left-6 top-6 text-xl text-red-400 font-bold">StayFinder</p>
+                <p className="font-embed absolute left-6 top-6 text-xl text-red-400 font-bold hidden md:block">StayFinder</p>
                 :""
             }
                 <div className="w-full h-full justify-center flex items-center">
@@ -74,7 +74,7 @@ function Item() {
                </div>
                 
 
-                {search ? (
+                {/* {search ? (
                   <div className="w-full h-full justify-center flex items-center mb-3">
                     <ul className="flex justify-between list-none h-[80%] w-[90%] max-w-[900px]  bg-white shadow-lg shadow-gray-400 min-w-50 text-sm lg:text-lg md:text-[17px] xl:text-xl transition-all items-center rounded-4xl">
                     <div className='flex flex-row w-[100%] h-full text-center '>
@@ -110,12 +110,12 @@ function Item() {
                     <p className='text-2xl  p-5 rounded-full'><IoSearch /></p>
                     </div>
                     </div>}
-        
+         */}
                     
               </nav>
-        <div className='mt-48 '>
+        <div className='mt-36 '>
         <p className='text-2xl font-bold text-left w-[50%] px-10 mt-5'>{data.name},{data.area}</p>
-        <div className='w-[850px] h-[650px] mt-5'><img className="w-full h-full object-cover rounded-2xl" src={data.image} alt="" /></div>
+        <div className='xl:w-[650px] xl:h-[650px] mt-5 w-[240px] h-[240px] md:w-[300px] md:h-[300px] lg:w-[550px] lg:h-[550px] '><img className="w-full h-full object-cover rounded-2xl" src={data.image} alt="" /></div>
         <div className='w-full h-[500px]  relative flex items-center justify-center'>
         <div className='absolute top-0 flex flex-col items-center  w-full'>
         <div className='w-[220px] h-[200px] border flex  items-center flex-col mt-8 sticky top-0 rounded-2xl shadow-2xl z-40 bg-white'>
@@ -146,18 +146,18 @@ function Item() {
         </div>
        <hr className="bg-black text-sm w-full mt-8"/>
 
-       <div className='mt-10 gap-3 flex flex-col items-center justify-center w-full ml-28 text-2xl  '>
-       <div className=' flex items-center justify-center w-[100%] font-bebas'>
-            <p className='text-center'><span className=' mr-3'>Starting date :</span>  <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} /></p>
+       <div className='mt-10 gap-3 flex flex-col items-center justify-center w-full ml-28 sm:ml-20 text-2xl  '>
+       <div className=' flex items-center justify-center w-[100%] font-bebas mr-10'>
+            <p className='text-center'><span className=' mr-20 '>Starting date :</span>  <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} /></p>
         </div>
         <div className='font-bebas'>
-            <p><span className=' mr-6'>Ending date : </span> <DatePicker selected={enddate} onChange={(date) => setEnddate(date)} /></p>
+            <p><span className=' mr-6 md:ml-10 xl:mr-27 md:mr-20 '>Ending date : </span > <DatePicker className='ml-0 sm:ml-0 md:ml-10 lg:ml-0 xl:ml-0 md:mr-10' selected={enddate} onChange={(date) => setEnddate(date)} /></p>
         </div>
        </div>
        <hr className="bg-black text-sm w-full mt-8 "/>
        <div className='flex flex-col items-center justify-center relative ' >
         <p className='font-bold text-2xl mt-3 absolute top-0 left-0 '>Description</p>
-       <p className='w-[700px] text-center mt-13'>{
+       <p className=' text-justify mt-13'>{
         showmore ? 
           text.substring(0,200)+ "..." : text
 }</p>
@@ -167,7 +167,7 @@ function Item() {
         </div>
         </div>
         </div>
-        <footer className=' fixed bottom-0 w-full h-20 bg-gray-500 z-50 mt-40 text-gray-400 text-center flex items-center justify-center '>
+        <footer className=' fixed bottom-0 w-[100%] h-20 bg-gray-500 z-50 mt-40 text-gray-400 text-center flex items-center justify-center '>
           <p>Developed by <span className='font-bold'>PDP</span> <a href="mailto:damodara2006@gmail.com">damodara2006@gmail.com</a> </p>
         </footer>
         
