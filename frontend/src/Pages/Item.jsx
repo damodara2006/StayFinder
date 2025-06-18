@@ -55,7 +55,7 @@ function Item() {
   return (
     <div className='w-screen flex items-center justify-center flex-col relative '>
       <ToastContainer/>
-        <nav className="h-[10%] bg-gray-100 w-full flex justify-center flex-col fixed z-30 top-0 ">
+        <nav className="h-[12%] bg-gray-100 w-full flex justify-center flex-col fixed z-30 top-0 ">
                 {search? 
                 <p className="font-embed absolute left-6 top-6 text-xl text-red-400 font-bold hidden md:block">StayFinder</p>
                 :""
@@ -67,7 +67,7 @@ function Item() {
                    <li className='flex flex-row items-center justify-center text-center gap-2 relative after:border-1 after:w-0 after:bottom-0 after:absolute hover:after:w-full after:transition-all after:opacity-0 hover:after:opacity-100 hover:scale-110 transition-all'><span className='text-xl'><MdRoomService /></span>Services</li>
                   </ul>
                 </div>
-               <div className='absolute top-4 right-10 font-bold'>
+               <div className='absolute top-4 right-6 font-bold'>
                {
                   user ? <p>{user}</p> : <p >Not logined</p>
                 }
@@ -113,7 +113,7 @@ function Item() {
          */}
                     
               </nav>
-        <div className='mt-36 '>
+        <div className='mt-26 '>
         <p className='text-2xl font-bold text-left w-[50%] px-10 mt-5'>{data.name},{data.area}</p>
         <div className='xl:w-[650px] xl:h-[650px] mt-5 w-[240px] h-[240px] md:w-[300px] md:h-[300px] lg:w-[550px] lg:h-[550px] '><img className="w-full h-full object-cover rounded-2xl" src={data.image} alt="" /></div>
         <div className='w-full h-[500px]  relative flex items-center justify-center'>
