@@ -14,7 +14,7 @@ import axios from "axios"
 import { FaRegHeart } from "react-icons/fa";
 import {useNavigate} from "react-router-dom"
 function Home() {
-  let BASE_URL = "https://stayfinder-backend-dcdq.onrender.com"
+  let BASE_URL = "http://localhost:8080"
     const [search, setSearch] = useState(window.innerWidth >= 600);
     const [sidebar, setsidebar] = useState(false)
     const [login, setlogin] = useState(false)
@@ -57,14 +57,14 @@ function Home() {
           // console.log(res)
           axios.post(`${BASE_URL}/login`, {email: res.data.email, source:2, username:res.data.name}, {withCredentials:true})
           .then(ress=>{
-            // console.log(ress.data)
+            console.log(ress.data)
             if(ress.data.email){
               axios.post(`${BASE_URL}/cookie`,{email:ress.data.email},{withCredentials:true})
               toast.success("Login successfull",{autoClose:2500})
               setlogin(false)
               setsidebar(false)
               // username.current.value 
-              setuser(ress.data.email)
+              setuser(ress.data.username)
             }
             
           })
@@ -135,7 +135,7 @@ function Home() {
   return (
     <div className="w-screen h-screen overflow-y-auto relative">
       <ToastContainer/>
-      <nav className="h-[17%] bg-gray-100 min-w-full flex justify-center flex-col fixed z-50">
+      <nav className="h-[17%] bg-gray-100 min-w-full flex justify-center flex-col fixed z-50 ">
         {search? 
         <p className="font-embed absolute left-6 top-6 text-xl text-red-400 font-bold">StayFinder</p>
         :""
@@ -190,18 +190,17 @@ function Home() {
       {search? 
       <div className='z-50 relative' >
         <p className='top-5 right-40 text-sm absolute p-2 rounded-full font-bold '>{userm ? userm : ""}</p>
-        {userm ? "": <p className=' hidden lg:block xl:block top-2 right-42 text-md absolute p-2'>Become a host</p>}
-        <div className=' top-2 right-27 text-3xl absolute p-2 rounded-full bg-gray-300 '>
+        {userm ? "": <p className=' hidden lg:block xl:block top-5 right-42 text-md absolute p-2'>Become a host</p>}
+        <div className=' top-4 right-27 text-3xl absolute p-2 rounded-full bg-gray-300 '>
         <TbWorld />
 
         </div>
-        
+        <div className=' top-4 right-11 text-3xl absolute p-2 rounded-full bg-gray-300 cursor-pointer  ' onClick={()=>setsidebar(!sidebar)}>
+        <IoReorderThreeOutline />
+        </div>
 
       </div>
        :""}
-       <div className=' top-2 right-2 text-3xl absolute p-2 rounded-full bg-gray-300 cursor-pointer z-50  ' onClick={()=>setsidebar(!sidebar)}>
-        <IoReorderThreeOutline />
-        </div>
        {sidebar  ?<div className='absolute z-50 w-fit bg-white top-16 h-fit px-5 py-2 right-7 rounded-b-xl rounded-[90%/100%]  shadow-xl text-center pt-3 cursor-pointer'onClick={()=>{
         if(login){
           setlogin(false)
@@ -236,8 +235,8 @@ function Home() {
        </div>
        </div> : ""}
 
-       <div className=' ml-5 absolute top-48'>
-        <ul className='flex gap-5 flex-wrap justify-center items-center'>
+       <div className=' ml-5 absolute top-40'>
+        <ul className='flex gap-5 flex-wrap justify-center items-center mr-6'>
           {data.map((item, key)=>(
             // console.log(item),
             <li key={key} className='relative ' onClick={()=>{
@@ -289,7 +288,7 @@ function Home() {
           ))}
         </ul>
        </div>
-       
+       <p className='z-50 bg-red-800'>Deve</p>
     </div>
   );
 }
