@@ -14,7 +14,7 @@ import axios from "axios"
 import { FaRegHeart } from "react-icons/fa";
 import {useNavigate} from "react-router-dom"
 function Home() {
-  let BASE_URL = "http://localhost:8080"
+  let BASE_URL = "https://stayfinder-backend-dcdq.onrender.com"
     const [search, setSearch] = useState(window.innerWidth >= 600);
     const [sidebar, setsidebar] = useState(false)
     const [login, setlogin] = useState(false)
@@ -189,18 +189,19 @@ function Home() {
       </nav>
       {search? 
       <div className='z-50 relative' >
-        <p className='top-5 right-40 text-sm absolute p-2 rounded-full font-bold '>{userm ? userm : ""}</p>
-        {userm ? "": <p className=' hidden lg:block xl:block top-5 right-42 text-md absolute p-2'>Become a host</p>}
-        <div className=' top-4 right-27 text-3xl absolute p-2 rounded-full bg-gray-300 '>
+        <p className='top-2 right-34 text-sm absolute p-2 rounded-full font-bold '>{userm ? userm : ""}</p>
+        {userm ? "": <p className=' hidden lg:block xl:block top-2 right-34 text-md absolute p-2'>Become a host</p>}
+        <div className=' top-2 right-20 text-3xl absolute p-2 rounded-full bg-gray-300 '>
         <TbWorld />
 
         </div>
-        <div className=' top-4 right-11 text-3xl absolute p-2 rounded-full bg-gray-300 cursor-pointer  ' onClick={()=>setsidebar(!sidebar)}>
-        <IoReorderThreeOutline />
-        </div>
+        
 
       </div>
        :""}
+       <div className=' top-2 right-2 text-3xl absolute p-2 rounded-full bg-gray-300 cursor-pointer z-50  ' onClick={()=>setsidebar(!sidebar)}>
+        <IoReorderThreeOutline />
+        </div>
        {sidebar  ?<div className='absolute z-50 w-fit bg-white top-16 h-fit px-5 py-2 right-7 rounded-b-xl rounded-[90%/100%]  shadow-xl text-center pt-3 cursor-pointer'onClick={()=>{
         if(login){
           setlogin(false)
@@ -288,7 +289,7 @@ function Home() {
           ))}
         </ul>
        </div>
-       <p className='z-50 bg-red-800'>Deve</p>
+       {/* <p className='z-50 bg-red-800'>Deve</p> */}
     </div>
   );
 }
