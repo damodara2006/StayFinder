@@ -4,8 +4,8 @@ import MONGODB from "../mongodb/index.js"
 app.use(router)
 
 await MONGODB()
-
-app.listen(8080,()=>{
-    console.log("Server running at :8080")
+let PORT = process.env.PORT || 8080
+app.listen(PORT,()=>{
+    console.log(`Server running at :${PORT}`)
 })
 // console.log("Working")
