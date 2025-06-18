@@ -53,9 +53,9 @@ function Item() {
     const[confirm, setconfirm] = useState(false)
     // console.log(text)
   return (
-    <div className='w-screen flex items-center justify-center flex-col relative'>
+    <div className='min-w-screen flex items-center justify-center flex-col relative'>
   <ToastContainer />
-  <nav className="h-[8%] bg-gray-100 w-full flex justify-center flex-col fixed z-30 top-0">
+  <nav className="h-[8%] bg-gray-100 min-w-full flex justify-center flex-col fixed z-30 top-0">
     {search && (
       <p className="font-embed absolute left-6 top-6 text-xl text-red-400 font-bold hidden md:block">StayFinder</p>
     )}
@@ -71,9 +71,9 @@ function Item() {
     </div>
   </nav>
 
-  <div className='mt-26 ml-1'>
+  <div className='mt-26 ml-1  items-center flex flex-col'>
     <p className='text-2xl font-bold text-left w-[100%] px-10 mt-5'>{data.name}, {data.area}</p>
-    <div className='xl:w-[650px] xl:h-[650px] mt-5 w-[240px] h-[240px] md:w-[300px] md:h-[300px] lg:w-[550px] lg:h-[550px]'>
+    <div className='xl:w-[650px] xl:h-[650px] mt-5 w-[240px] h-[240px] md:w-[300px] md:h-[300px] lg:w-[550px] lg:h-[550px] flex items-center '>
       <img className="w-full h-full object-cover rounded-2xl" src={data.image} alt="" />
     </div>
 
@@ -129,7 +129,7 @@ function Item() {
 
         <hr className="bg-black text-sm w-full mt-8" />
 
-        <div className='flex flex-col items-center justify-center relative'>
+        <div className='flex flex-col items-center justify-center relative px-5'>
           <p className='font-bold text-2xl mt-3 absolute top-0 left-0'>Description</p>
           <p className='text-justify mt-13'>
             {showmore ? text.substring(0, 200) + "..." : text}
