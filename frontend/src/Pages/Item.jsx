@@ -26,7 +26,7 @@ function Item() {
     let location = useLocation()
     let data = location.state.data
     let user = location?.state?.user
-    console.log(user)
+    // console.log(user)
 
     const [search, setSearch] = useState(window.innerWidth >= 600);
     const [sidebar, setsidebar] = useState(false)
@@ -47,7 +47,7 @@ function Item() {
       axios.get(`${BASE_URL}/listing`)
       .then(res=>{setdata(res.data )})
     },[data])
-    console.log(data)
+    // console.log(data)
     const[price, setprice] = useState(0)
     let text = data.description
     const[confirm, setconfirm] = useState(false)

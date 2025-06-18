@@ -3,13 +3,13 @@ import Apihandler from "../utils/Apihandler.js";
 
 const listingdata = Apihandler(async(req,res)=>{
     const data = await ListSchema.find()
-    console.log(data)
+    // console.log(data)
     res.send(data)
 })
 
 const updatelike = Apihandler(async(req,res)=>{
     let{id,data} = req.params
-    console.log(id)
+    // console.log(id)
     let bool;
     if(data == "true"){
         bool = true
@@ -17,9 +17,9 @@ const updatelike = Apihandler(async(req,res)=>{
     else{
         bool = false
     }
-    console.log(typeof data)
+    // console.log(typeof data)
     const item = await ListSchema.updateOne({_id:id},{liked:!bool})
-    console.log(item)
+    // console.log(item)
     res.send("Done")
 })
 

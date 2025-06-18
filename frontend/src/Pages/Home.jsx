@@ -57,7 +57,7 @@ function Home() {
           // console.log(res)
           axios.post(`${BASE_URL}/login`, {email: res.data.email, source:2, username:res.data.name}, {withCredentials:true})
           .then(ress=>{
-            console.log(ress.data)
+            // console.log(ress.data)
             if(ress.data.email){
               axios.post(`${BASE_URL}/cookie`,{email:ress.data.email},{withCredentials:true})
               toast.success("Login successfull",{autoClose:2500})

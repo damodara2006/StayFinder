@@ -3,7 +3,7 @@ import Apihandler from "../utils/Apihandler.js";
 import ApiError from "../utils/ApiError.js";
 const register = Apihandler(async(req,res)=>{
     const {email, password, source, username} = req.body;
-    console.log(source)
+    // console.log(source)
     if(source !== 1){
         res.send("Invalid source")
     }

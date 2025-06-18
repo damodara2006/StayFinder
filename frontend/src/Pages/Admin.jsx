@@ -45,7 +45,7 @@ function Admin() {
         
     }
     useEffect(()=>{
-      console.log("working")
+      // console.log("working")
       axios.get(`${BASE_URL}/getbooking`)
       .then(res=>{
         setdata(res.data)

@@ -22,7 +22,7 @@ const loginuser = Apihandler(async(req,res)=>{
                     $and:[{email:email, source:source}]
                 }
             )
-            console.log(user)
+            // console.log(user)
 
             if(user){
                 if(user.password == password){
@@ -62,8 +62,12 @@ const loginuser = Apihandler(async(req,res)=>{
 const cookie = Apihandler(async(req,res)=>{
     const {email} = req.body;
     const value = jwt.sign({email}, "json-web-token")
-    res.cookie("Login", value, {maxAge:600000})
-    console.log("Done")
+    res.cookie("Login", value, {
+        sameSite:"none",
+        secure:true,
+        httpOny:true,
+        maxAge:600000})
+    // console.log("Done")
     res.send("Done")  
 })
 

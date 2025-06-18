@@ -23,7 +23,7 @@ const storage = multer.diskStorage({
 
 
 const imageupload = Apihandler(async(req,res, next)=>{
-  console.log(req.body)
+  // console.log(req.body)
     const file = req.files[0]
     const image_url = (await cloudinary.uploader.upload(file.path)).secure_url
     fs.unlinkSync(file.path)
