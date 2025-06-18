@@ -142,7 +142,7 @@ function Item() {
     </div>
   </div>
 
-  <footer className='fixed bottom-0 w-full h-20 bg-gray-500 z-50 text-gray-400 text-center flex items-center justify-center'>
+  <footer className='fixed bottom-0 w-full h-20 bg-gray-500 z-50 text-gray-400 text-center flex items-center justify-center px-2'>
     <p>Developed by <span className='font-bold'>PDP</span> <a href="mailto:damodara2006@gmail.com">damodara2006@gmail.com</a></p>
   </footer>
 </div>
