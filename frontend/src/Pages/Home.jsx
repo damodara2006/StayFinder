@@ -195,12 +195,13 @@ function Home() {
         <TbWorld />
 
         </div>
-        <div className=' top-4 right-11 text-3xl absolute p-2 rounded-full bg-gray-300 cursor-pointer  ' onClick={()=>setsidebar(!sidebar)}>
-        <IoReorderThreeOutline />
-        </div>
+        
 
       </div>
        :""}
+       <div className=' top-4 right-11 text-3xl absolute p-2 rounded-full bg-gray-300 cursor-pointer z-50  ' onClick={()=>setsidebar(!sidebar)}>
+        <IoReorderThreeOutline />
+        </div>
        {sidebar  ?<div className='absolute z-50 w-fit bg-white top-16 h-fit px-5 py-2 right-7 rounded-b-xl rounded-[90%/100%]  shadow-xl text-center pt-3 cursor-pointer'onClick={()=>{
         if(login){
           setlogin(false)
