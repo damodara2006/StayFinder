@@ -9,7 +9,7 @@ function App() {
   <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT}>
    <BrowserRouter>
    <Routes>
-    <Route path='/' element={<Home/>}/>
+  <Route path='/' element={<Home/>}/>
   <Route path='/admin' element={<Admin/>}/>
   <Route path="/item" element={<Item/>}/>
    </Routes>
