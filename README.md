@@ -18,6 +18,7 @@ This project utilizes a variety of modern technologies:
 *   **Axios:** A promise-based HTTP client for making requests to the backend.
 *   **React Toastify:** For adding notifications to the app.
 
+
 ### Backend
 *   **Node.js:** A JavaScript runtime for the server-side.
 *   **Express.js:** A minimal and flexible Node.js web application framework.
