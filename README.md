@@ -1,3 +1,6 @@
+### Live preview
+You can see live preview of this by clicking : [StayFinder](https://stayfinder-4zh4.onrender.com/)
+
 # StayFinder
 
 StayFinder is a full-stack web application built with the MERN stack (MongoDB, Express.js, React, Node.js) that allows users to find, book, and manage accommodation listings. It serves as a comprehensive platform for both property owners to list their places and for travelers to find a place to stay.
